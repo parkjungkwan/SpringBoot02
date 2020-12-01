@@ -1,5 +1,10 @@
 package com.example.demo.repositories;
 
-public class UserRepository {
-    
+import com.example.demo.domains.UserDto;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository {
+    public int insert(UserDto user);
 }

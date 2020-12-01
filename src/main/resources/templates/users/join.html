@@ -17,7 +17,7 @@
     <table>
         <tr>
             <td>ID </td>
-            <td><input id="userid" type="text"></td>
+            <td><input id="userid" type="text" value="kim"></td>
         </tr>
         <tr>
             <td>PW</td>
@@ -49,8 +49,16 @@
                                        name: document.getElementById('name').value}),
                 dataType: 'json',
                 contentType: 'application/json',
-                success: d => {},
-                error: e => {}
+                success: d => {
+                    if(d.name === 'FAILURE'){
+                        alert(`회원가입 실패`)
+                    }else{
+                        alert(`${d.name} 가입 성공`)
+                    }
+                },
+                error: e => {
+                    alert(`${e} 을 이유로 전송실패`)
+                }
             })
         })
         document.getElementById('cancel-btn')
