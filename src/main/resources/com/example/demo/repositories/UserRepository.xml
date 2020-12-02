@@ -6,4 +6,9 @@
      insert into users(userid, password, name) 
      values (#{userid}, #{password}, #{name})
     </insert>
+    <select id="login" resultType="com.example.demo.domains.UserDto" 
+                        parameterType="com.example.demo.domains.UserDto">
+        select * from users 
+        where userid like #{userid} and password like #{password}
+    </select>
 </mapper>

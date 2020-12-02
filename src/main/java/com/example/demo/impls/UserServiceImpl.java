@@ -14,4 +14,10 @@ public class UserServiceImpl implements UserService {
     public int join(UserDto user) {
         return userRepository.insert(user);
     }
+
+    @Override
+    public UserDto login(UserDto user) {
+        // TODO Auto-generated method stub
+        return userRepository.login(user);
+    }
 }

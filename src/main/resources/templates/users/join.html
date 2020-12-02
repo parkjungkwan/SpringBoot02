@@ -17,7 +17,7 @@
     <table>
         <tr>
             <td>ID </td>
-            <td><input id="userid" type="text" value="kim"></td>
+            <td><input id="userid" type="text"></td>
         </tr>
         <tr>
             <td>PW</td>
@@ -51,7 +51,7 @@
                 contentType: 'application/json',
                 success: d => {
                     if(d.name === 'FAILURE'){
-                        alert(`회원가입 실패`)
+                        alert(`실패`)
                     }else{
                         alert(`${d.name} 가입 성공`)
                     }
