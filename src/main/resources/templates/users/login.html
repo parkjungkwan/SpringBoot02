@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>로그인</h1>
+    <a id="home" href="#">홈으로</a>
+    <form>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td><input id='userid' type="text"> </td>
+            </tr>
+            <tr>
+                <td>PW</td>
+                <td><input id='password' type="text"> </td>
+            </tr>
+            <tr>
+                
+                <td colspane='2'>
+                    <button id='login-btn'>로그인</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        document.getElementById('home').addEventListener('click', e => {
+            location.href = '/'
+        })
+        document.getElementById('login-btn').addEventListener('click', e => {
+            e.preventDefault()
+            $.ajax({
+                url: '/users/login',
+                type: 'POST',
+                data: JSON.stringify({
+                    userid : document.getElementById('userid').value, 
+                    password: document.getElementById('password').value
+                }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    if(d.message !== 'FAILURE'){
+                        location.href = '/move/users/mypage'
+                        alert(`로그인한 사람의 아이디: ${d.loginUser.userid}`)
+                        sessionStorage.setItem('loginUserid', d.loginUser.userid)
+                    }else{
+                        location.href = '/move/users/login'
+                    }
+                },
+                error: e => {
+                    alert(`로그인 에러발생 ${e}`)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
