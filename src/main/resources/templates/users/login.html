@@ -44,9 +44,9 @@
                 contentType: 'application/json',
                 success: d => {
                     if(d.message !== 'FAILURE'){
-                        location.href = '/move/users/mypage'
                         alert(`로그인한 사람의 아이디: ${d.loginUser.userid}`)
                         sessionStorage.setItem('loginUserid', d.loginUser.userid)
+                        location.href = '/move/users/mypage'
                     }else{
                         location.href = '/move/users/login'
                     }

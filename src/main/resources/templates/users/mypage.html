@@ -12,27 +12,52 @@
     <table>
         <tr>
             <td>ID</td>
-            <td></td>
+            <td id="userid"></td>
         </tr>
         <tr>
             <td>PW</td>
-            <td></td>
+            <td id="password"></td>
         </tr>
         <tr>
             <td>Name</td>
-            <td></td>
+            <td id="name"></td>
         </tr>
         <tr>
-            <td colspan='2'></td>
+            <td colspan='2'>
+                <button id="update">비번수정</button>
+                <button id="remove">회원탈퇴</button>
+                <button id="logout">로그아웃</button>
+            </td>
         </tr>
     </table>
     <script>
         document.getElementById('home').addEventListener('click', e => {
             location.href = '/'
         })
+        document.getElementById('update').addEventListener('click', e => {
+            location.href = '/move/users/update'
+        })
         alert(`마이페이지로 넘어온 로그인 유저아이디는 ${sessionStorage.getItem('loginUserid')}`)
         $.getJSON(`/users/${sessionStorage.getItem('loginUserid')}`, d => {
-            alert(`마이페이지 데이터 전송 성공`)
+            document.getElementById('userid').innerHTML = d.loginUser.userid
+            document.getElementById('password').innerHTML = d.loginUser.password
+            document.getElementById('name').innerHTML = d.loginUser.name
+        })
+        document.getElementById('remove').addEventListener('click', e => {
+            $.ajax({
+                url: '/users',
+                type: 'DELETE',
+                data: JSON.stringify({
+                    userid: sessionStorage.getItem('loginUserid')
+                }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    sessionStorage.setItem('loginUserid', '')    
+                    location.href = '/'
+                },
+                error: e => {alert(`회원탈퇴 실패 ${e}`)}
+            })
         })
     </script>
 </body>

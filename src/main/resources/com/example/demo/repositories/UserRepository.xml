@@ -11,4 +11,13 @@
         select * from users 
         where userid like #{userid} and password like #{password}
     </select>
+    <select id="selectById" resultType="com.example.demo.domains.UserDto"
+                        parameterType="string">
+        select * from users
+        where userid like #{userid}                
+    </select>
+    <update id="update" parameterType="com.example.demo.domains.UserDto">
+        update users set password = #{password} where userid like #{userid}
+    </update>
+    <delete id="delete" parameterType="com.example.demo.domains.UserDto"></delete>
 </mapper>
