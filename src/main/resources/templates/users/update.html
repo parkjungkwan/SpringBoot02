@@ -34,7 +34,7 @@
         })
         document.getElementById('userid').innerHTML = sessionStorage.getItem('loginUserid')
         document.getElementById('confirm').addEventListener('click', e => {
-            alert(`수정하려는 ID: ${document.getElementById('userid').text}, PW: ${document.getElementById('password').value}`)
+            alert(`수정하려는 ID: ${document.getElementById('userid').innerText}, PW: ${document.getElementById('password').value}`)
             $.ajax({
                 url: '/users',
                 type: 'PUT',
@@ -45,7 +45,12 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: d => {
-                    location.href = '/move/users/mypage'
+                    if(d.message === 'SUCCESS'){
+                        location.href = '/move/users/mypage'
+                    }else{
+                        location.href = '/move/users/update'
+                    }
+                    
                 },
                 error: e => {
                     alert(`비번수정 실패 ${e}`)

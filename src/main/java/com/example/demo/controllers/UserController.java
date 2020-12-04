@@ -30,6 +30,8 @@ public class UserController{
         int result = userService.join(user);
         if(result == 1){
             map.put("message","SUCCESS");
+        }else{
+            map.put("message", "FAILURE");
         }
         return map;
     }

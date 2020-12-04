@@ -37,6 +37,10 @@
         document.getElementById('update').addEventListener('click', e => {
             location.href = '/move/users/update'
         })
+        document.getElementById('logout').addEventListener('click', e =>{
+            sessionStorage.setItem('loginUserid', '')   
+            location.href = '/'
+        })
         alert(`마이페이지로 넘어온 로그인 유저아이디는 ${sessionStorage.getItem('loginUserid')}`)
         $.getJSON(`/users/${sessionStorage.getItem('loginUserid')}`, d => {
             document.getElementById('userid').innerHTML = d.loginUser.userid
